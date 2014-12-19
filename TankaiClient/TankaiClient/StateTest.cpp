@@ -4,10 +4,8 @@
 
 #include "globals.h"
 
-StateTest::StateTest() :
-	shape(125.f)
+StateTest::StateTest()
 {
-	shape.setFillColor(sf::Color::Green);
 	if (!tPlayerOne.loadFromFile(".\\Resources\\Images\\Player1.png"))
 	{
 		std::cout << "Error loading Player 1 texture";
@@ -37,7 +35,6 @@ void StateTest::logic()
 
 void StateTest::render()
 {
-	window->draw(shape);
 	window->draw(sPlayerOne);
 }
 

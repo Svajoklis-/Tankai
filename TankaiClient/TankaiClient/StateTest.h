@@ -24,7 +24,6 @@ public:
 	~StateTest();
 
 private:
-	sf::CircleShape shape;
 	sf::Texture tPlayerOne;
 	sf::Sprite sPlayerOne;
 };

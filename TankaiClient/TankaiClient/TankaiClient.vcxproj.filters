@@ -21,7 +21,7 @@
     <ClInclude Include="globals.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="GameLocal.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
