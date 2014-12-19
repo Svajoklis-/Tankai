@@ -20,7 +20,7 @@ StateTest::StateTest() :
 void StateTest::events()
 {
 	if (!window->isOpen())
-		state = st_exit;
+		state = stExit;
 
 	sf::Event event;
 	while (window->pollEvent(event))

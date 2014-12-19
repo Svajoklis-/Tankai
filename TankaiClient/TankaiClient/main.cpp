@@ -1,6 +1,6 @@
 /*
 *
-*	Main file. It runs and controls GameStates, initializes and deinitializes SDL.
+*	Main file. It runs and controls GameStates, initializes and deinitializes SFML.
 *
 */
 
@@ -19,54 +19,59 @@
 int init();
 void quit();
 
-gameStates state = st_null;
-GameState *current_state;
+gameStates state = stNull;
+GameState *currentState;
 
 // used by frame limiter
-sf::Clock fps_clock;
+sf::Clock fpsClock;
 
 int main(int argc, char *argv[])
 {
 	if (init() != 0)
+	{
+		std::cout << "Init failed..." << std::endl;
 		return 2;
+	}
+
+	std::cout << "Init succesful..." << std::endl;
 
 	// you can set initial state here
-	current_state = new StateTest();
+	currentState = new StateTest();
 
-	while (state != st_exit)
+	while (state != stExit)
 	{
-		fps_clock.restart();
+		fpsClock.restart();
 
-		current_state->events();
-		current_state->logic();
+		currentState->events();
+		currentState->logic();
 
 		// states render to window texture
 		window->clear();
-		current_state->render();
+		currentState->render();
 		window->display();
 
 		// check if state hasn't changed
-		state = current_state->getState();
+		state = currentState->getState();
 
-		if (state != st_null)
+		if (state != stNull)
 		{
 			switch (state)
 			{
-			case st_exit:
-				delete current_state;
+			case stExit:
+				delete currentState;
 				break;
-			case st_test:
-				delete current_state;
-				current_state = new StateTest();
+			case stTest:
+				delete currentState;
+				currentState = new StateTest();
 				break;
 			default:
-				state = st_null;
+				state = stNull;
 				break;
 			}
 		}
 		// delay if frame finished fast enough
-		if (fps_clock.getElapsedTime().asMilliseconds() < 1000 / screenFPS)
-			sf::sleep(sf::milliseconds((1000 / screenFPS) - fps_clock.getElapsedTime().asMilliseconds()));
+		if (fpsClock.getElapsedTime().asMilliseconds() < 1000 / screenFPS)
+			sf::sleep(sf::milliseconds((1000 / screenFPS) - fpsClock.getElapsedTime().asMilliseconds()));
 	}
 
 	quit();

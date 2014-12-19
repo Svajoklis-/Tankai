@@ -1,3 +1,11 @@
+/*
+*
+*	Globals.h
+*	All the global variables (screen dimensions, data that is shared between states)
+*	should be declared here.
+*
+*/
+
 #ifndef H_GLOBALS
 #define H_GLOBALS
 

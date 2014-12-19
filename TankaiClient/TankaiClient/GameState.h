@@ -1,12 +1,20 @@
+/*
+*
+*	GameState.h
+*	This is the header file for abstract class GameState used in the main application for switching
+*	between various "screens" of the game
+*
+*/
+
 #ifndef H_GAME_STATE
 #define H_GAME_STATE
 
 enum gameStates
 {
-	st_exit,
-	st_null,
+	stExit,
+	stNull,
 
-	st_test
+	stTest
 };
 
 class GameState
@@ -20,7 +28,7 @@ public:
 	gameStates getState(){ return state; };
 
 protected:
-	gameStates state = st_null;
+	gameStates state = stNull;
 };
 
 #endif // H_GAME_STATE

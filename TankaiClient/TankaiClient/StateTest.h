@@ -1,3 +1,11 @@
+/*
+*
+*	StateTest.h
+*	StateTest implements the GameState interface,
+*	This state is used for temporary work, learning.
+*
+*/
+
 #include "GameState.h"
 
 #include "globals.h"
