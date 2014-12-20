@@ -9,6 +9,8 @@
 #include "GameState.h"
 
 #include "globals.h"
+#include "Game.h"
+#include "GameData.h"
 
 #ifndef H_STATE_TEST
 #define H_STATE_TEST
@@ -26,6 +28,11 @@ public:
 private:
 	sf::Texture tPlayerOne;
 	sf::Sprite sPlayerOne;
+
+	bool local = true;
+
+	Game *game;
+	GameData *gameData;
 };
 
 #endif // H_BRANCH_TEST

@@ -75,12 +75,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StateTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameLocal.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="StateTest.h" />

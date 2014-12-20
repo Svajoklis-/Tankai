@@ -10,6 +10,12 @@
     <ClCompile Include="globals.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -21,7 +27,10 @@
     <ClInclude Include="globals.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="GameLocal.h">
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

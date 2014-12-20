@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 
 int init()
 {
-	window = new sf::RenderWindow(sf::VideoMode(500, 500), "SFML works!");
+	window = new sf::RenderWindow(sf::VideoMode(500, 500), "Tankai");
 	view = new sf::View();
 	view->reset(sf::FloatRect(0, 0, 250, 250));
 	window->setView(*view);

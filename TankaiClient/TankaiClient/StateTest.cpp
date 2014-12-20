@@ -3,6 +3,8 @@
 #include "StateTest.h"
 
 #include "globals.h"
+#include "Game.h"
+#include "GameData.h"
 
 StateTest::StateTest()
 {
@@ -13,6 +15,13 @@ StateTest::StateTest()
 
 	sPlayerOne.setTexture(tPlayerOne);
 	sPlayerOne.setTextureRect(sf::IntRect(0, 0, 16, 16));
+
+	if (local)
+	{
+		game = new Game();
+		gameData = new GameData(game);
+	}
+	
 }
 
 void StateTest::events()
@@ -30,11 +39,17 @@ void StateTest::events()
 
 void StateTest::logic()
 {
+	if (local)
+	{
+		game->tick();
+	}
 
+	gameData->receive();
 }
 
 void StateTest::render()
 {
+	sPlayerOne.setPosition(gameData->x, gameData->y);
 	window->draw(sPlayerOne);
 }
 
