@@ -26,10 +26,26 @@ public:
 
 	GameData(Game *game){ this->game = game; }
 
+	// ---- remote data to be received
 	void receive();
 
 	int x = 0;
 	int y = 0;
+	int direction = 0;
+	int rank = 0;
+
+	// ---- local data to be sent
+	void send();
+
+	int newDirection = 0;
+	int newRank = 0;
+
+	// ---- local data
+
+	int oldRank = 0;
+	int dispRank = 0;
+
+	int repeats = 100;
 };
 
 #endif

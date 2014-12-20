@@ -31,10 +31,23 @@ public:
 	Game();
 	void tick();
 
+	// ---- server data that is sent
+
 	int x = 0;
 	int y = 0;
+
+	int direction = 0;
+	int rank = 0;
+
+	// ---- additional game-related data
+
 	int degrees = 0;
 	int degrees2 = 0;
+
+	// ---- incoming data
+
+	int newDirection = 0;
+	int newRank = 0;
 };
 
 #endif

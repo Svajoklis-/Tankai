@@ -34,6 +34,37 @@ void StateTest::events()
 	{
 		if (event.type == sf::Event::Closed)
 			window->close();
+		if (event.type == sf::Event::KeyPressed)
+		{
+			switch (event.key.code)
+			{
+			case sf::Keyboard::A:
+				gameData->newDirection += 1;
+				if (gameData->newDirection >= 4)
+					gameData->newDirection = 0;
+				break;
+
+			case sf::Keyboard::Num1:
+				gameData->oldRank = gameData->rank;
+				gameData->newRank = 0;
+				break;
+
+			case sf::Keyboard::Num2:
+				gameData->oldRank = gameData->rank;
+				gameData->newRank = 1;
+				break;
+
+			case sf::Keyboard::Num3:
+				gameData->oldRank = gameData->rank;
+				gameData->newRank = 2;
+				break;
+
+			case sf::Keyboard::Num4:
+				gameData->oldRank = gameData->rank;
+				gameData->newRank = 3;
+				break;
+			}
+		}
 	}
 }
 
@@ -43,12 +74,31 @@ void StateTest::logic()
 	{
 		game->tick();
 	}
-
+	gameData->send();
 	gameData->receive();
+	
+	if (gameData->oldRank != gameData->newRank)
+	{
+		if (gameData->repeats >= 0)
+		{
+			if (gameData->repeats % 25 >= 25/2)
+				gameData->dispRank = gameData->oldRank;
+			else
+				gameData->dispRank = gameData->newRank;
+			gameData->repeats--;
+		}
+		else
+		{
+			gameData->oldRank = gameData->newRank;
+			gameData->dispRank = gameData->rank;
+			gameData->repeats = 100;
+		}
+	}
 }
 
 void StateTest::render()
 {
+	sPlayerOne.setTextureRect(sf::IntRect(gameData->direction*32, gameData->dispRank*16, 16, 16));
 	sPlayerOne.setPosition(gameData->x, gameData->y);
 	window->draw(sPlayerOne);
 }
