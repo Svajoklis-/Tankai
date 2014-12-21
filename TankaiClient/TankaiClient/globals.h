@@ -16,4 +16,15 @@ const int screenFPS = 120;
 extern sf::RenderWindow *window;
 extern sf::View *view;
 
+struct coord
+{
+	int x;
+	int y;
+};
+
+extern int viewScale;
+extern coord screenSize;
+extern coord windowSize;
+
+
 #endif

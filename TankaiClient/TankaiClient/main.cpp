@@ -81,9 +81,9 @@ int main(int argc, char *argv[])
 
 int init()
 {
-	window = new sf::RenderWindow(sf::VideoMode(500, 500), "Tankai");
+	window = new sf::RenderWindow(sf::VideoMode(windowSize.x, windowSize.y), "Tankai");
 	view = new sf::View();
-	view->reset(sf::FloatRect(0, 0, 250, 250));
+	view->reset(sf::FloatRect(0, 0, (float)screenSize.x, (float)screenSize.y));
 	window->setView(*view);
 
 	return 0;

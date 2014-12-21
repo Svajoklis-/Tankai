@@ -28,11 +28,16 @@ public:
 private:
 	sf::Texture tPlayerOne;
 	sf::Sprite sPlayerOne;
+	sf::RectangleShape shBackground;
+	sf::RectangleShape shFieldBackground;
 
 	bool local = true;
 
 	Game *game;
 	GameData *gameData;
+
+	coord fieldOffset;
+	coord fieldSize;
 };
 
 #endif // H_BRANCH_TEST

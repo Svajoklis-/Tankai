@@ -16,10 +16,10 @@ void Game::tick()
 		direction = newDirection;
 		rank = newRank;
 
-		x = int(117 + 16 * sin((degrees)*PI / 180));
-		y = int(117 + 16 * cos((degrees2)*PI / 180));
+		x = int(0 + abs((13 * 16 - 16) * sin((degrees)*PI / 180)));
+		y = int(0 + abs((13 * 16 - 16) * cos((degrees2)*PI / 180)));
 		
-		degrees += 1;
-		degrees2 += 6;
+		degrees += 0.25;
+		degrees2 += 1;
 	}
 }

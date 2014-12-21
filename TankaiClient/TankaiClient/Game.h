@@ -41,8 +41,8 @@ public:
 
 	// ---- additional game-related data
 
-	int degrees = 0;
-	int degrees2 = 0;
+	double degrees = 0;
+	double degrees2 = 0;
 
 	// ---- incoming data
 

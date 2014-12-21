@@ -22,6 +22,7 @@ private:
 	bool local = true;
 
 	Game *game;
+
 public:
 
 	GameData(Game *game){ this->game = game; }
@@ -42,10 +43,6 @@ public:
 
 	// ---- local data
 
-	int oldRank = 0;
-	int dispRank = 0;
-
-	int repeats = 100;
 };
 
 #endif
