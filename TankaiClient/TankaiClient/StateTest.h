@@ -12,6 +12,8 @@
 #include "Game.h"
 #include "GameData.h"
 
+#include "PlayerTank.h"
+
 #ifndef H_STATE_TEST
 #define H_STATE_TEST
 
@@ -26,18 +28,22 @@ public:
 	~StateTest();
 
 private:
-	sf::Texture tPlayerOne;
-	sf::Sprite sPlayerOne;
 	sf::RectangleShape shBackground;
 	sf::RectangleShape shFieldBackground;
+
+	sf::Texture tPlayerOne;
+	sf::Sprite sPlayerOne;
 
 	bool local = true;
 
 	Game *game;
 	GameData *gameData;
 
+	// sizes of the game field
 	coord fieldOffset;
 	coord fieldSize;
+
+	PlayerTank playerOne;
 };
 
 #endif // H_BRANCH_TEST

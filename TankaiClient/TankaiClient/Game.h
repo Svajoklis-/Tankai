@@ -21,6 +21,7 @@ class Game
 {
 private:
 	sf::Clock entityClock;
+	sf::Clock rankClock;
 	int tickDuration = 16;
 	bool entitesPaused = false;
 
@@ -47,7 +48,6 @@ public:
 	// ---- incoming data
 
 	int newDirection = 0;
-	int newRank = 0;
 };
 
 #endif

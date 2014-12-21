@@ -6,20 +6,13 @@
 #include "Game.h"
 #include "GameData.h"
 
-StateTest::StateTest()
+StateTest::StateTest() :
+playerOne(".\\Resources\\Images\\Player1.png")
 {
 	fieldOffset = { 16, 10 };
 	fieldSize = { 13 * 16, 13 * 16 };
 	shBackground = *(new sf::RectangleShape(sf::Vector2<float>((float)screenSize.x, (float)screenSize.y)));
 	shFieldBackground = *(new sf::RectangleShape(sf::Vector2<float>((float)fieldSize.x, (float)fieldSize.y)));
-
-	if (!tPlayerOne.loadFromFile(".\\Resources\\Images\\Player1.png"))
-	{
-		std::cout << "Error loading Player 1 texture";
-	}
-
-	sPlayerOne.setTexture(tPlayerOne);
-	sPlayerOne.setTextureRect(sf::IntRect(0, 0, 16, 16));
 
 	if (local)
 	{
@@ -52,22 +45,6 @@ void StateTest::events()
 				if (gameData->newDirection >= 4)
 					gameData->newDirection = 0;
 				break;
-
-			case sf::Keyboard::Num1:
-				gameData->newRank = 0;
-				break;
-
-			case sf::Keyboard::Num2:
-				gameData->newRank = 1;
-				break;
-
-			case sf::Keyboard::Num3:
-				gameData->newRank = 2;
-				break;
-
-			case sf::Keyboard::Num4:
-				gameData->newRank = 3;
-				break;
 			}
 		}
 	}
@@ -82,6 +59,10 @@ void StateTest::logic()
 
 	gameData->send();
 	gameData->receive();
+
+	playerOne.setCoords({ gameData->x, gameData->y });
+	playerOne.setDirection(gameData->direction);
+	playerOne.setRank(gameData->rank);
 }
 
 void StateTest::render()
@@ -89,9 +70,7 @@ void StateTest::render()
 	window->draw(shBackground);
 	window->draw(shFieldBackground);
 
-	sPlayerOne.setTextureRect(sf::IntRect(gameData->direction*32, gameData->rank*16, 16, 16));
-	sPlayerOne.setPosition((float)gameData->x + fieldOffset.x, (float)gameData->y + fieldOffset.y);
-	window->draw(sPlayerOne);
+	playerOne.render(fieldOffset);
 }
 
 StateTest::~StateTest()

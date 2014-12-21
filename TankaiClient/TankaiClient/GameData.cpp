@@ -16,6 +16,5 @@ void GameData::send()
 	if (local)
 	{
 		game->newDirection = newDirection;
-		game->newRank = newRank;
 	}
 }

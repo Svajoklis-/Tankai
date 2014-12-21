@@ -16,6 +16,9 @@
     <ClCompile Include="GameData.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerTank.cpp">
+      <Filter>Game\Entites</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -33,6 +36,15 @@
     <ClInclude Include="GameData.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Game\Entites</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>Game\Entites</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTank.h">
+      <Filter>Game\Entites</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -43,6 +55,9 @@
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{d01e9d5a-3960-4387-87c8-6dded7b5cc42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entites">
+      <UniqueIdentifier>{5ce566cb-aedf-4495-a35e-9b1327e36bd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
