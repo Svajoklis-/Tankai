@@ -9,6 +9,8 @@
 
 #include "Entity.h"
 
+#include <iostream>
+
 #ifndef H_TANK
 #define H_TANK
 
@@ -31,6 +33,8 @@ public:
 	{
 		this->rank = rank;
 	};
+
+	virtual void render(coord){ std::cout << "Rendering tank..." << std::endl; };
 
 protected:
 

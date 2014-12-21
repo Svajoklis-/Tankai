@@ -25,11 +25,13 @@ public:
 
 	virtual void setDirection(int direction)
 	{
+		this->direction = direction;
 		sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
 	}
 
 	virtual void setRank(int rank)
 	{
+		this->rank = rank;
 		sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
 	}
 

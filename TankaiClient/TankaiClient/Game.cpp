@@ -5,6 +5,8 @@
 Game::Game()
 {
 	local = true;
+
+	fieldSize = { 13 * 16, 13 * 16 };
 }
 
 void Game::tick()
@@ -25,7 +27,7 @@ void Game::tick()
 			}
 		}
 
-		x = int(0 + abs((13 * 16 - 16) * sin((degrees)*PI / 180)));
+		x = int(fieldSize.x / 2 - 8 + ((fieldSize.x / 2 - 8)) * sin((degrees)*PI / 180));
 		y = int(0 + abs((13 * 16 - 16) * cos((degrees2)*PI / 180)));
 		
 		degrees += 0.25;

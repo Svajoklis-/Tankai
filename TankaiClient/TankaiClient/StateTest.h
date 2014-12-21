@@ -43,7 +43,7 @@ private:
 	coord fieldOffset;
 	coord fieldSize;
 
-	PlayerTank playerOne;
+	Tank *playerOne;
 };
 
 #endif // H_BRANCH_TEST

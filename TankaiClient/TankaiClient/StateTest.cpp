@@ -6,14 +6,15 @@
 #include "Game.h"
 #include "GameData.h"
 
-StateTest::StateTest() :
-playerOne(".\\Resources\\Images\\Player1.png")
+StateTest::StateTest()
 {
+	playerOne = new PlayerTank(".\\Resources\\Images\\Player1.png");
+
 	fieldOffset = { 16, 10 };
 	fieldSize = { 13 * 16, 13 * 16 };
 	shBackground = *(new sf::RectangleShape(sf::Vector2<float>((float)screenSize.x, (float)screenSize.y)));
 	shFieldBackground = *(new sf::RectangleShape(sf::Vector2<float>((float)fieldSize.x, (float)fieldSize.y)));
-
+	 
 	if (local)
 	{
 		game = new Game();
@@ -60,9 +61,9 @@ void StateTest::logic()
 	gameData->send();
 	gameData->receive();
 
-	playerOne.setCoords({ gameData->x, gameData->y });
-	playerOne.setDirection(gameData->direction);
-	playerOne.setRank(gameData->rank);
+	playerOne->setCoords({ gameData->x, gameData->y });
+	playerOne->setDirection(gameData->direction);
+	playerOne->setRank(gameData->rank);
 }
 
 void StateTest::render()
@@ -70,7 +71,7 @@ void StateTest::render()
 	window->draw(shBackground);
 	window->draw(shFieldBackground);
 
-	playerOne.render(fieldOffset);
+	playerOne->render(fieldOffset);
 }
 
 StateTest::~StateTest()

@@ -10,16 +10,26 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "globals.h"
-
 #ifndef H_GAME
 #define H_GAME
+
+namespace nsGame
+{
+	struct coord
+	{
+		int x;
+		int y;
+	};
+}
 
 #define PI 3.14159265
 
 class Game
 {
 private:
+
+	nsGame::coord fieldSize;
+
 	sf::Clock entityClock;
 	sf::Clock rankClock;
 	int tickDuration = 16;
