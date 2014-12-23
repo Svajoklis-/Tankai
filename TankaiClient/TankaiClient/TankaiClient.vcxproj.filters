@@ -13,9 +13,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameData.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerTank.cpp">
       <Filter>Game\Entites</Filter>
     </ClCompile>
@@ -31,9 +28,6 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="GameData.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">

@@ -22,6 +22,15 @@ struct coord
 	int y;
 };
 
+enum directions
+{
+	DIR_UP = 0,
+	DIR_RIGHT,
+	DIR_DOWN,
+	DIR_LEFT,
+	DIR_NO = -1
+};
+
 extern int viewScale;
 extern coord screenSize;
 extern coord windowSize;

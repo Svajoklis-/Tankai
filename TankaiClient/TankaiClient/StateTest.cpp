@@ -4,22 +4,15 @@
 
 #include "globals.h"
 #include "Game.h"
-#include "GameData.h"
 
 StateTest::StateTest()
 {
-	playerOne = new PlayerTank(".\\Resources\\Images\\Player1.png");
-
 	fieldOffset = { 16, 10 };
 	fieldSize = { 13 * 16, 13 * 16 };
 	shBackground = *(new sf::RectangleShape(sf::Vector2<float>((float)screenSize.x, (float)screenSize.y)));
 	shFieldBackground = *(new sf::RectangleShape(sf::Vector2<float>((float)fieldSize.x, (float)fieldSize.y)));
 	 
-	if (local)
-	{
-		game = new Game();
-		gameData = new GameData(game);
-	}
+	game = new Game();
 	
 	shBackground.setFillColor(sf::Color(102, 102, 102, 255));
 
@@ -41,10 +34,34 @@ void StateTest::events()
 		{
 			switch (event.key.code)
 			{
-			case sf::Keyboard::A:
-				gameData->newDirection += 1;
-				if (gameData->newDirection >= 4)
-					gameData->newDirection = 0;
+			case sf::Keyboard::Up:
+				direction = DIR_UP;
+				break;
+
+			case sf::Keyboard::Right:
+				direction = DIR_RIGHT;
+				break;
+
+			case sf::Keyboard::Down:
+				direction = DIR_DOWN;
+				break;
+
+			case sf::Keyboard::Left:
+				direction = DIR_LEFT;
+				break;
+
+			}
+		}
+
+		if (event.type == sf::Event::KeyReleased)
+		{
+			switch (event.key.code)
+			{
+			case sf::Keyboard::Up:
+			case sf::Keyboard::Right:
+			case sf::Keyboard::Down:
+			case sf::Keyboard::Left:
+				direction = DIR_NO;
 				break;
 			}
 		}
@@ -53,17 +70,9 @@ void StateTest::events()
 
 void StateTest::logic()
 {
-	if (local)
-	{
-		game->tick();
-	}
+	game->playerOne->setDirection(direction);
 
-	gameData->send();
-	gameData->receive();
-
-	playerOne->setCoords({ gameData->x, gameData->y });
-	playerOne->setDirection(gameData->direction);
-	playerOne->setRank(gameData->rank);
+	game->tick();
 }
 
 void StateTest::render()
@@ -71,7 +80,7 @@ void StateTest::render()
 	window->draw(shBackground);
 	window->draw(shFieldBackground);
 
-	playerOne->render(fieldOffset);
+	game->playerOne->render(fieldOffset);
 }
 
 StateTest::~StateTest()

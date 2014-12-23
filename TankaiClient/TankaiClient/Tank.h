@@ -20,11 +20,10 @@ public:
 
 	virtual void setCoords(coord coords)
 	{
-		x = coords.x;
-		y = coords.y;
+		this->coords = coords;
 	};
 
-	virtual void setDirection(int direction)
+	virtual void setDirection(directions direction)
 	{
 		this->direction = direction;
 	};
@@ -34,13 +33,21 @@ public:
 		this->rank = rank;
 	};
 
+	virtual coord getCoords()
+	{
+		return coords;
+	}
+
+	virtual int getDirection(){ return direction; }
+	virtual int getRank(){ return rank; };
+
 	virtual void render(coord){ std::cout << "Rendering tank..." << std::endl; };
 
 protected:
 
 	// int x, y ;
 	int rank;
-	int direction;
+	directions direction;
 
 };
 

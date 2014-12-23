@@ -10,25 +10,18 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "globals.h"
+#include "Tank.h"
+
 #ifndef H_GAME
 #define H_GAME
-
-namespace nsGame
-{
-	struct coord
-	{
-		int x;
-		int y;
-	};
-}
 
 #define PI 3.14159265
 
 class Game
 {
 private:
-
-	nsGame::coord fieldSize;
+	coord fieldSize;
 
 	sf::Clock entityClock;
 	sf::Clock rankClock;
@@ -42,22 +35,9 @@ public:
 	Game();
 	void tick();
 
-	// ---- server data that is sent
+	Tank *playerOne;
 
-	int x = 0;
-	int y = 0;
-
-	int direction = 0;
 	int rank = 0;
-
-	// ---- additional game-related data
-
-	double degrees = 0;
-	double degrees2 = 0;
-
-	// ---- incoming data
-
-	int newDirection = 0;
 };
 
 #endif

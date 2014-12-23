@@ -11,7 +11,7 @@ PlayerTank::PlayerTank(std::string textureLocation)
 		std::cout << "Error loading Player 1 texture" << std::endl;
 	}
 
-	direction = 0;
+	direction = DIR_NO;
 	rank = 0;
 
 	sprite.setTexture(this->texture);
@@ -20,6 +20,6 @@ PlayerTank::PlayerTank(std::string textureLocation)
 
 void PlayerTank::render(coord fieldOffset)
 {
-	sprite.setPosition((float)x + fieldOffset.x, (float)y + fieldOffset.y);
+	sprite.setPosition((float)coords.x + fieldOffset.x, (float)coords.y + fieldOffset.y);
 	window->draw(sprite);
 }

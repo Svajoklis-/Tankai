@@ -10,7 +10,6 @@
 
 #include "globals.h"
 #include "Game.h"
-#include "GameData.h"
 
 #include "PlayerTank.h"
 
@@ -34,16 +33,13 @@ private:
 	sf::Texture tPlayerOne;
 	sf::Sprite sPlayerOne;
 
-	bool local = true;
-
 	Game *game;
-	GameData *gameData;
 
 	// sizes of the game field
 	coord fieldOffset;
 	coord fieldSize;
 
-	Tank *playerOne;
+	directions direction = DIR_NO;
 };
 
 #endif // H_BRANCH_TEST

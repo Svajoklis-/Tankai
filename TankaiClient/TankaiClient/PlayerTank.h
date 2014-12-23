@@ -8,6 +8,7 @@
 #include "globals.h"
 #include "Tank.h"
 
+#include <iostream>
 #include <string>
 
 #ifndef H_PLAYER_TANK
@@ -23,13 +24,14 @@ public:
 	PlayerTank(std::string textureLocation);
 	void render(coord fieldOffset);
 
-	virtual void setDirection(int direction)
+	void setDirection(directions direction)
 	{
 		this->direction = direction;
-		sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
+		if (direction != DIR_NO)
+			sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
 	}
 
-	virtual void setRank(int rank)
+	void setRank(int rank)
 	{
 		this->rank = rank;
 		sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));

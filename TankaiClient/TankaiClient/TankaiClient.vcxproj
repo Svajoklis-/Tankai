@@ -76,7 +76,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerTank.cpp" />
@@ -85,7 +84,6 @@
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameData.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="PlayerTank.h" />
