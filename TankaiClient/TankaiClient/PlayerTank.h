@@ -28,6 +28,10 @@ public:
 
 	void setRank(int rank);
 
+	void setCoords(coord coords);
+
+	int frame = 0;
+
 private:
 
 	sf::Texture texture;

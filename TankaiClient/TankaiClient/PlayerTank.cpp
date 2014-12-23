@@ -28,11 +28,20 @@ void PlayerTank::setDirection(directions direction)
 {
 	this->direction = direction;
 	if (direction != DIR_NO)
-		sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
+		sprite.setTextureRect(sf::IntRect(direction * 32 + frame * 16, rank * 16, 16, 16));
 }
 
 void PlayerTank::setRank(int rank)
 {
 	this->rank = rank;
-	sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
+	sprite.setTextureRect(sf::IntRect(direction * 32 + frame * 16, rank * 16, 16, 16));
+}
+
+void PlayerTank::setCoords(coord coords)
+{
+	this->coords = coords;
+	if (frame == 0)
+		frame = 1;
+	else
+		frame = 0;
 }
