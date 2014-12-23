@@ -35,35 +35,102 @@ void StateTest::events()
 			switch (event.key.code)
 			{
 			case sf::Keyboard::Up:
-				direction = DIR_UP;
+				if (direction != DIR_UP)
+					direction = DIR_UP;
 				break;
 
 			case sf::Keyboard::Right:
-				direction = DIR_RIGHT;
+				if (direction != DIR_RIGHT)
+					direction = DIR_RIGHT;
 				break;
 
 			case sf::Keyboard::Down:
-				direction = DIR_DOWN;
+				if (direction != DIR_DOWN)
+					direction = DIR_DOWN;
 				break;
 
 			case sf::Keyboard::Left:
-				direction = DIR_LEFT;
+				if (direction != DIR_LEFT)
+					direction = DIR_LEFT;
+				break;
+
+			case sf::Keyboard::W:
+				if (direction2 != DIR_UP)
+					direction2 = DIR_UP;
+				break;
+
+			case sf::Keyboard::D:
+				if (direction2 != DIR_RIGHT)
+					direction2 = DIR_RIGHT;
+				break;
+
+			case sf::Keyboard::S:
+				if (direction2 != DIR_DOWN)
+					direction2 = DIR_DOWN;
+				break;
+
+			case sf::Keyboard::A:
+				if (direction2 != DIR_LEFT)
+					direction2 = DIR_LEFT;
 				break;
 
 			}
 		}
 
-		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
-			!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
-			!sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
-			!sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			direction = DIR_NO;
+		if (event.type == sf::Event::KeyReleased)
+		{
+			switch (event.key.code)
+			{
+			case sf::Keyboard::Up:
+				if (direction == DIR_UP)
+					direction = DIR_NO;
+				break;
+
+			case sf::Keyboard::Right:
+				if (direction == DIR_RIGHT)
+					direction = DIR_NO;
+				break;
+
+			case sf::Keyboard::Down:
+				if (direction == DIR_DOWN)
+					direction = DIR_NO;
+				break;
+
+			case sf::Keyboard::Left:
+				if (direction == DIR_LEFT)
+					direction = DIR_NO;
+				break;
+
+
+			case sf::Keyboard::W:
+				if (direction2 == DIR_UP)
+					direction2 = DIR_NO;
+				break;
+
+			case sf::Keyboard::D:
+				if (direction2 == DIR_RIGHT)
+					direction2 = DIR_NO;
+				break;
+
+			case sf::Keyboard::S:
+				if (direction2 == DIR_DOWN)
+					direction2 = DIR_NO;
+				break;
+
+			case sf::Keyboard::A:
+				if (direction2 == DIR_LEFT)
+					direction2 = DIR_NO;
+				break;
+
+			}
+		}
 	}
 }
 
 void StateTest::logic()
 {
 	game->playerOne->setDirection(direction);
+	game->playerTwo->setDirection(direction2);
 
 	game->tick();
 }
@@ -74,6 +141,7 @@ void StateTest::render()
 	window->draw(shFieldBackground);
 
 	game->playerOne->render(fieldOffset);
+	game->playerTwo->render(fieldOffset);
 }
 
 StateTest::~StateTest()

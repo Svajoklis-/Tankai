@@ -40,6 +40,7 @@ private:
 	coord fieldSize;
 
 	directions direction = DIR_NO;
+	directions direction2 = DIR_NO;
 };
 
 #endif // H_BRANCH_TEST

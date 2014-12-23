@@ -36,6 +36,7 @@ public:
 	void tick();
 
 	Tank *playerOne;
+	Tank *playerTwo;
 
 	int rank = 0;
 };
