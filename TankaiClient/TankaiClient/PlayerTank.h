@@ -24,18 +24,9 @@ public:
 	PlayerTank(std::string textureLocation);
 	void render(coord fieldOffset);
 
-	void setDirection(directions direction)
-	{
-		this->direction = direction;
-		if (direction != DIR_NO)
-			sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
-	}
+	void setDirection(directions direction);
 
-	void setRank(int rank)
-	{
-		this->rank = rank;
-		sprite.setTextureRect(sf::IntRect(direction * 32, rank * 16, 16, 16));
-	}
+	void setRank(int rank);
 
 private:
 

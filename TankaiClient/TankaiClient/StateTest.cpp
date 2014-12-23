@@ -53,18 +53,11 @@ void StateTest::events()
 			}
 		}
 
-		if (event.type == sf::Event::KeyReleased)
-		{
-			switch (event.key.code)
-			{
-			case sf::Keyboard::Up:
-			case sf::Keyboard::Right:
-			case sf::Keyboard::Down:
-			case sf::Keyboard::Left:
-				direction = DIR_NO;
-				break;
-			}
-		}
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+			!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
+			!sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+			!sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			direction = DIR_NO;
 	}
 }
 

@@ -26,11 +26,11 @@ void Game::tick()
 				c.y--;
 			break;
 		case DIR_RIGHT: // up
-			if (c.x < fieldSize.x)
+			if (c.x < fieldSize.x - 16)
 				c.x++;
 			break;
 		case DIR_DOWN: // up
-			if (c.y < fieldSize.y)
+			if (c.y < fieldSize.y - 16)
 				c.y++;
 			break;
 		case DIR_LEFT: // up
