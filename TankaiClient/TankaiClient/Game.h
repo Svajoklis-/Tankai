@@ -38,7 +38,8 @@ public:
 	Tank *playerOne;
 	Tank *playerTwo;
 
-	int rank = 0;
+	Tank *tanks[64];
+	int maxTankCount = 64;
 };
 
 #endif

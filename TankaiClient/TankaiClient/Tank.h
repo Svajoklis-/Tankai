@@ -42,8 +42,14 @@ public:
 	virtual directions getDirection(){ return direction; }
 	virtual int getRank(){ return rank; };
 	virtual directions getOldDirection(){ return oldDirection; }
+	virtual bool move(coord fieldSize, Tank *otherTanks[], int maxTankCount){ return true; };
 
 	virtual void render(coord){ std::cout << "Rendering tank..." << std::endl; };
+
+	virtual bool checkTankCollision(coord newCoords, Tank *otherTank);
+
+	virtual void setID(int ID){ this->ID = ID; };
+	virtual int getID(){ return this->ID; };
 
 protected:
 
@@ -51,6 +57,10 @@ protected:
 	int rank;
 	directions direction;
 	directions oldDirection;
+
+	bool transparentToLevel = false, transparentToTanks = false;
+	coord size;
+	int ID;
 
 };
 

@@ -30,6 +30,8 @@ public:
 
 	void setCoords(coord coords);
 
+	bool move(coord fieldSize, Tank *otherTanks[], int maxTankCount);
+
 	int frame = 0;
 
 private:

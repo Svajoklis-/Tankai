@@ -16,6 +16,9 @@
     <ClCompile Include="PlayerTank.cpp">
       <Filter>Game\Entites</Filter>
     </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Game\Entites</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
