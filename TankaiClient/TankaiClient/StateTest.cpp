@@ -140,8 +140,12 @@ void StateTest::render()
 	window->draw(shBackground);
 	window->draw(shFieldBackground);
 
+	game->map->renderUnder(fieldOffset);
+
 	game->playerOne->render(fieldOffset);
 	game->playerTwo->render(fieldOffset);
+
+	game->map->renderOver(fieldOffset);
 }
 
 StateTest::~StateTest()

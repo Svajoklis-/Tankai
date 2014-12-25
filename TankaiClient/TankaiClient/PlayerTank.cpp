@@ -8,7 +8,7 @@ PlayerTank::PlayerTank(std::string textureLocation)
 {
 	if (!texture.loadFromFile(textureLocation))
 	{
-		std::cout << "Error loading Player 1 texture" << std::endl;
+		std::cout << "Error loading tank texture" << std::endl;
 	}
 
 	oldDirection = DIR_NO;
@@ -128,6 +128,10 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount)
 				return false;
 		}
 	}
+
+	coord oldC = getCoords();
+	if (oldC.x == c.x && oldC.y == c.y)
+		return false;
 	
 	setCoords(c);
 

@@ -23,6 +23,8 @@ Game::Game()
 	playerTwo->setID(1);
 
 	playerTwo->setCoords({ 32, 32 });
+
+	map = new Map();
 }
 
 void Game::tick()

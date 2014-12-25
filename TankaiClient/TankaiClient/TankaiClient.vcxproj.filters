@@ -19,6 +19,9 @@
     <ClCompile Include="Tank.cpp">
       <Filter>Game\Entites</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -41,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="PlayerTank.h">
       <Filter>Game\Entites</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
