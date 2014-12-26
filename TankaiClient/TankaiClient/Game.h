@@ -43,6 +43,8 @@ public:
 	int maxTankCount = 64;
 
 	Map *map;
+
+	~Game();
 };
 
 #endif

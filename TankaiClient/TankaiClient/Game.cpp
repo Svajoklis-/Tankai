@@ -22,8 +22,6 @@ Game::Game()
 	tanks[1] = playerTwo;
 	playerTwo->setID(1);
 
-	playerTwo->setCoords({ 32, 32 });
-
 	map = new Map();
 }
 
@@ -41,4 +39,16 @@ void Game::tick()
 			}
 		}
 	}
+}
+
+Game::~Game()
+{
+	for (int i = 0; i < 64; i++)
+		delete[] tanks[i];
+	delete[] tanks;
+
+	delete playerOne;
+	delete playerTwo;
+
+	delete map;
 }

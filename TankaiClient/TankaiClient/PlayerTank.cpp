@@ -62,14 +62,22 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount)
 		// if stuck on level
 			// transparent to level
 
-	// nebe transparent kai nebe stuck
+	// chech if needs to be transparent to tanks
 
-	/*if (!transparentToTanks)
+	transparentToTanks = false;
+	for (int i = 0; i < maxTankCount; i++)
 	{
-		for (int i = 0; i < maxTankCount)
+		if (otherTanks[i] != nullptr)
 		{
-			if (otherTanks[i] != nullptr)
-		}*/
+			if (checkTankCollision(c, otherTanks[i]))
+			{
+				transparentToTanks = true;
+				break;
+			}
+		}
+	}
+
+	// move a single tick
 
 	switch (getDirection())
 	{
@@ -97,6 +105,8 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount)
 		break;
 	}
 
+	// snap if tank changes direction
+
 	if (direction == DIR_UP || direction == DIR_DOWN)
 	{
 		if (c.x % 8 < 4)
@@ -120,14 +130,22 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount)
 		}
 	}
 
-	for (int i = 0; i < maxTankCount; i++)
+	// check for collision with tanks
+
+	if (!transparentToTanks)
 	{
-		if (otherTanks[i] != nullptr)
+		for (int i = 0; i < maxTankCount; i++)
 		{
-			if(checkTankCollision(c, otherTanks[i]))
-				return false;
+			if (otherTanks[i] != nullptr)
+			{
+				if (checkTankCollision(c, otherTanks[i]))
+					return false;
+			}
 		}
 	}
+
+	// check if moved at all
+	// if not - we don't need to set coordinates
 
 	coord oldC = getCoords();
 	if (oldC.x == c.x && oldC.y == c.y)

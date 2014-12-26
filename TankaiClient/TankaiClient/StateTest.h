@@ -27,8 +27,8 @@ public:
 	~StateTest();
 
 private:
-	sf::RectangleShape shBackground;
-	sf::RectangleShape shFieldBackground;
+	sf::RectangleShape *shBackground;
+	sf::RectangleShape *shFieldBackground;
 
 	sf::Texture tPlayerOne;
 	sf::Sprite sPlayerOne;

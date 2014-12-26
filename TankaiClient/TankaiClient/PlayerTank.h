@@ -18,9 +18,6 @@ class PlayerTank : public Tank
 {
 public:
 
-	// int x, y ;
-	// int rank;
-	// int direction;
 	PlayerTank(std::string textureLocation);
 	void render(coord fieldOffset);
 
