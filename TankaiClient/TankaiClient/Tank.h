@@ -5,14 +5,16 @@
 *
 */
 
+#ifndef H_TANK
+#define H_TANK
+
+class Map;
+
 #include "globals.h"
 
 #include "Entity.h"
 
 #include <iostream>
-
-#ifndef H_TANK
-#define H_TANK
 
 class Tank : public Entity
 {
@@ -42,7 +44,7 @@ public:
 	virtual directions getDirection(){ return direction; }
 	virtual int getRank(){ return rank; };
 	virtual directions getOldDirection(){ return oldDirection; }
-	virtual bool move(coord fieldSize, Tank *otherTanks[], int maxTankCount){ return true; };
+	virtual bool move(coord fieldSize, Tank *otherTanks[], int maxTankCount, Map *map){ return true; };
 
 	virtual void render(coord){ std::cout << "Rendering tank..." << std::endl; };
 
@@ -64,5 +66,6 @@ protected:
 
 };
 
+#include "Map.h"
 
 #endif

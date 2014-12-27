@@ -5,10 +5,13 @@
 *
 */
 
-#include "globals.h"
-
 #ifndef H_MAP
 #define H_MAP
+
+#include "globals.h"
+
+class Tank;
+
 
 enum tileType
 {
@@ -20,6 +23,20 @@ enum tileType
 	TILE_ICE
 };
 
+enum collision
+{
+	COLL_NO,
+	COLL_YES,
+	COLL_WATER
+};
+
+struct tile
+{
+	tileType type;
+	int unit; // how many parts, 1 is full block, 2 is for concrete, 4 is for bricks
+	bool *integrity; // unit * y + x
+};
+
 class Map
 {
 public:
@@ -29,15 +46,19 @@ public:
 	void renderOver(coord fieldOffset);
 	void renderUnder(coord fieldOffset);
 
+	collision checkTankCollision(Tank *tank, coord newCoords);
+
 private:
 
 	sf::Texture tileTexture;
 	sf::Sprite singleTile;
 
-	tileType **typeMap;
-	coord typeMapSize;
+	tile **tileMap;
+	coord tileMapSize;
 
+	void setType(int x, int y, tileType type);
 };
 
+#include "Tank.h"
 
 #endif

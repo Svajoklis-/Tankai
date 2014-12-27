@@ -35,7 +35,7 @@ void Game::tick()
 		{
 			if (tanks[i] != nullptr)
 			{
-				tanks[i]->move(fieldSize, tanks, maxTankCount);
+				tanks[i]->move(fieldSize, tanks, maxTankCount, map);
 			}
 		}
 	}

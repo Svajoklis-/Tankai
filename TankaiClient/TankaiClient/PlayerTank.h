@@ -7,6 +7,7 @@
 
 #include "globals.h"
 #include "Tank.h"
+#include "Map.h"
 
 #include <iostream>
 #include <string>
@@ -27,7 +28,7 @@ public:
 
 	void setCoords(coord coords);
 
-	bool move(coord fieldSize, Tank *otherTanks[], int maxTankCount);
+	bool move(coord fieldSize, Tank *otherTanks[], int maxTankCount, Map *map);
 
 	int frame = 0;
 

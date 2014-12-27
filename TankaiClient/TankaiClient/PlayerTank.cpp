@@ -51,7 +51,7 @@ void PlayerTank::setCoords(coord coords)
 		frame = 0;
 }
 
-bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount)
+bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount, Map *map)
 {
 	coord c = getCoords();
 
@@ -62,7 +62,17 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount)
 		// if stuck on level
 			// transparent to level
 
-	// chech if needs to be transparent to tanks
+	// check if needs to be transparent to level
+
+	collision col = map->checkTankCollision(this, c);
+
+	transparentToLevel = false;
+	if (col == COLL_YES)
+	{
+		transparentToLevel = true;
+	}
+
+	// check if needs to be transparent to tanks
 
 	transparentToTanks = false;
 	for (int i = 0; i < maxTankCount; i++)
@@ -142,6 +152,15 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount)
 					return false;
 			}
 		}
+	}
+
+	// check for collision with level
+
+	if (!transparentToLevel)
+	{
+		col = map->checkTankCollision(this, c);
+		if (col == COLL_YES)
+			return false;
 	}
 
 	// check if moved at all
