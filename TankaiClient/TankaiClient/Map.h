@@ -43,8 +43,7 @@ public:
 
 	Map();
 
-	void renderOver(coord fieldOffset);
-	void renderUnder(coord fieldOffset);
+	void render(coord fieldOffset, int plane);
 
 	collision checkTankCollision(Tank *tank, coord newCoords);
 

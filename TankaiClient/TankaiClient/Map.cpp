@@ -1,6 +1,7 @@
 #include "Map.h"
 
 #include <iostream>
+#include <fstream>
 
 Map::Map()
 {
@@ -21,8 +22,40 @@ Map::Map()
 			
 	}
 
-	setType(0, 0, TILE_CONCRETE);
-	setType(1, 1, TILE_GRASS);
+	char mapChar;
+	std::ifstream failas(".\\Resources\\map.txt");
+
+	for (int y = 0; y < tileMapSize.y; y++)
+	{
+		for (int x = 0; x < tileMapSize.x; x++)
+		{
+			failas >> mapChar;
+			std::cout << mapChar;
+			switch (mapChar)
+			{
+			case 'A':
+				setType(x, y, TILE_AIR);
+				break;
+			case 'B':
+				setType(x, y, TILE_BRICK);
+				break;
+			case 'C':
+				setType(x, y, TILE_CONCRETE);
+				break;
+			case 'W':
+				setType(x, y, TILE_WATER);
+				break;
+			case 'G':
+				setType(x, y, TILE_GRASS);
+				break;
+			case 'I':
+				setType(x, y, TILE_ICE);
+				break;
+			}
+		}
+		std::cout << std::endl;
+		//failas >> mapChar;
+	}
 
 	if (!tileTexture.loadFromFile(".\\Resources\\Images\\Tiles.png"))
 	{
@@ -34,42 +67,43 @@ Map::Map()
 }
 
 // grass, air
-void Map::renderOver(coord fieldOffset)
+void Map::render(coord fieldOffset, int plane)
 {
 	for (int i = 0; i < tileMapSize.x; i++)
 	{
 		for (int j = 0; j < tileMapSize.y; j++)
 		{
-			if (tileMap[i][j].type == TILE_AIR ||
-				tileMap[i][j].type == TILE_BRICK ||
-				tileMap[i][j].type == TILE_CONCRETE ||
-				tileMap[i][j].type == TILE_WATER ||
-				tileMap[i][j].type == TILE_ICE)
-				continue;
+			if (plane == 1)
+				if (tileMap[i][j].type == TILE_AIR ||
+					tileMap[i][j].type == TILE_BRICK ||
+					tileMap[i][j].type == TILE_CONCRETE ||
+					tileMap[i][j].type == TILE_WATER ||
+					tileMap[i][j].type == TILE_ICE)
+					continue;
 
-			singleTile.setTextureRect(sf::IntRect(tileMap[i][j].type * 16, 0, 16, 16));
-			singleTile.setPosition((float)i * 16 + fieldOffset.x, (float)j * 16 + fieldOffset.y);
+			if (plane == 0)
+				if (tileMap[i][j].type == TILE_GRASS ||
+					tileMap[i][j].type == TILE_AIR)
+					continue;
 
-			window->draw(singleTile);
-		}
-	}
-}
+			for (int y = 0; y < tileMap[i][j].unit; y++)
+			{
+				for (int x = 0; x < tileMap[i][j].unit; x++)
+				{
+					if (tileMap[i][j].integrity[y * tileMap[i][j].unit + x] == true)
+					{
+						singleTile.setTextureRect(sf::IntRect(
+							tileMap[i][j].type * 16 + x * (16 / tileMap[i][j].unit),
+							y * (16 / tileMap[i][j].unit),
+							16 / tileMap[i][j].unit,
+							16 / tileMap[i][j].unit));
+						singleTile.setPosition((float)i * 16 + fieldOffset.x + x * (16 / tileMap[i][j].unit),
+							(float)j * 16 + fieldOffset.y + y * (16 / tileMap[i][j].unit));
 
-// brick, concrete, water, ice
-void Map::renderUnder(coord fieldOffset)
-{
-	for (int i = 0; i < tileMapSize.x; i++)
-	{
-		for (int j = 0; j < tileMapSize.y; j++)
-		{
-			if (tileMap[i][j].type == TILE_GRASS ||
-				tileMap[i][j].type == TILE_AIR)
-				continue;
-
-			singleTile.setTextureRect(sf::IntRect(tileMap[i][j].type * 16, 0, 16, 16));
-			singleTile.setPosition((float)i * 16 + fieldOffset.x, (float)j * 16 + fieldOffset.y);
-
-			window->draw(singleTile);
+						window->draw(singleTile);
+					}
+				}
+			}
 		}
 	}
 }
@@ -84,30 +118,52 @@ collision Map::checkTankCollision(Tank *tank, coord newCoords)
 		{
 			collides = COLL_NO;
 
+			if (tileMap[i][j].type == TILE_GRASS || tileMap[i][j].type == TILE_AIR)
+				continue;
+
 			if (tileMap[i][j].type == TILE_CONCRETE)
 			{
-				collides = COLL_YES;
+				for (int y = 0; y < tileMap[i][j].unit; y++)
+				{
+					for (int x = 0; x < tileMap[i][j].unit; x++)
+					{
+						if (tileMap[i][j].integrity[y * tileMap[i][j].unit + x] == false)
+						{
+							collides = COLL_NO;
+							continue;
+						}
 
-				if (newCoords.x <= i * 16 - 16)
-					collides = COLL_NO;
-				if (newCoords.x >= i * 16 + 16)
-					collides = COLL_NO;
-				if (newCoords.y <= j * 16 - 16)
-					collides = COLL_NO;
-				if (newCoords.y >= j * 16 + 16)
-					collides = COLL_NO;
+						collides = COLL_YES;
+
+						if (newCoords.x <= i * 16 + x * (16 / tileMap[i][j].unit) - 16)
+							collides = COLL_NO;
+						if (newCoords.x >= i * 16 + x * (16 / tileMap[i][j].unit) + (16 / tileMap[i][j].unit))
+							collides = COLL_NO;
+						if (newCoords.y <= j * 16 + y * (16 / tileMap[i][j].unit) - 16)
+							collides = COLL_NO;
+						if (newCoords.y >= j * 16 + y * (16 / tileMap[i][j].unit) + (16 / tileMap[i][j].unit))
+							collides = COLL_NO;
+
+						if (collides != COLL_NO)
+							break;
+					}
+
+					if (collides != COLL_NO)
+						break;
+				}
+
 			}
 
-			if (collides == COLL_YES)
+			if (collides != COLL_NO)
 				break;
 		}
 
-		if (collides == COLL_YES)
+		if (collides != COLL_NO)
 			break;
 	}
 
-	if (collides == COLL_YES)
-		return COLL_YES;
+	if (collides != COLL_NO)
+		return collides;
 	else
 		return COLL_NO;
 }
