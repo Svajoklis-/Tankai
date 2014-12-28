@@ -67,7 +67,7 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount, Map
 	collision col = map->checkTankCollision(this, c);
 
 	transparentToLevel = false;
-	if (col == COLL_YES)
+	if (col != COLL_NO)
 	{
 		transparentToLevel = true;
 	}
@@ -159,7 +159,7 @@ bool PlayerTank::move(coord fieldSize, Tank *otherTanks[], int maxTankCount, Map
 	if (!transparentToLevel)
 	{
 		col = map->checkTankCollision(this, c);
-		if (col == COLL_YES)
+		if (col != COLL_NO)
 			return false;
 	}
 

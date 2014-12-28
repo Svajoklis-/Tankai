@@ -110,60 +110,98 @@ void Map::render(coord fieldOffset, int plane)
 
 collision Map::checkTankCollision(Tank *tank, coord newCoords)
 {
-	collision collides = COLL_YES;
+	bool collides = false;
+	bool collidesWater = false;
+
+	bool *collisionMap;
+	int collisionUnit;
 
 	for (int i = 0; i < tileMapSize.x; i++)
 	{
 		for (int j = 0; j < tileMapSize.y; j++)
 		{
-			collides = COLL_NO;
+			bool localCollides = true;
 
 			if (tileMap[i][j].type == TILE_GRASS || tileMap[i][j].type == TILE_AIR)
 				continue;
 
-			if (tileMap[i][j].type == TILE_CONCRETE)
+			if (tileMap[i][j].unit == 4)
 			{
-				for (int y = 0; y < tileMap[i][j].unit; y++)
+				collisionMap = new bool[2 * 2];
+				collisionUnit = 2;
+				for (int x = 0; x < 2; x++)
 				{
-					for (int x = 0; x < tileMap[i][j].unit; x++)
+					for (int y = 0; y < 2; y++)
 					{
-						if (tileMap[i][j].integrity[y * tileMap[i][j].unit + x] == false)
-						{
-							collides = COLL_NO;
-							continue;
-						}
-
-						collides = COLL_YES;
-
-						if (newCoords.x <= i * 16 + x * (16 / tileMap[i][j].unit) - 16)
-							collides = COLL_NO;
-						if (newCoords.x >= i * 16 + x * (16 / tileMap[i][j].unit) + (16 / tileMap[i][j].unit))
-							collides = COLL_NO;
-						if (newCoords.y <= j * 16 + y * (16 / tileMap[i][j].unit) - 16)
-							collides = COLL_NO;
-						if (newCoords.y >= j * 16 + y * (16 / tileMap[i][j].unit) + (16 / tileMap[i][j].unit))
-							collides = COLL_NO;
-
-						if (collides != COLL_NO)
-							break;
+						collisionMap[y * 2 + x] = tileMap[i][j].integrity[y * 4 + x * 2] ||
+							tileMap[i][j].integrity[y * 4 + (x * 2 + 1)] ||
+							tileMap[i][j].integrity[(y + 1) * 4 + x * 2] ||
+							tileMap[i][j].integrity[(y + 1) * 4 + (x * 2 + 1)];
 					}
-
-					if (collides != COLL_NO)
-						break;
 				}
 
 			}
+			else
+			{
+				collisionMap = tileMap[i][j].integrity;
+				collisionUnit = tileMap[i][j].unit;
+			}
 
-			if (collides != COLL_NO)
-				break;
-		}
+			for (int y = 0; y < collisionUnit; y++)
+			{
+				for (int x = 0; x < collisionUnit; x++)
+				{
+					if (collisionMap[y * collisionUnit + x] == false)
+					{
+						localCollides = false;
+						continue;
+					}
 
-		if (collides != COLL_NO)
-			break;
+					localCollides = true;
+
+					if (newCoords.x <= i * 16 + x * (16 / collisionUnit) - 16)
+						localCollides = false;
+					if (newCoords.x >= i * 16 + x * (16 / collisionUnit) + (16 / collisionUnit))
+						localCollides = false;
+					if (newCoords.y <= j * 16 + y * (16 / collisionUnit) - 16)
+						localCollides = false;
+					if (newCoords.y >= j * 16 + y * (16 / collisionUnit) + (16 / collisionUnit))
+						localCollides = false;
+
+					if (localCollides)
+						break;
+
+				} // collisionMap iteration
+
+				if (localCollides)
+					break;
+			}
+
+			if (localCollides == true)
+			{
+				if (tileMap[i][j].type == TILE_WATER)
+					collidesWater = true;
+				else
+					collides = true;
+			}
+
+			if (tileMap[i][j].unit == 4)
+			{
+				delete[] collisionMap;
+			}
+
+		} // tile iteration
+
 	}
 
-	if (collides != COLL_NO)
-		return collides;
+	if (collides && !collidesWater)
+		return COLL_YES;
+	else if (!collides && collidesWater)
+		return COLL_WATER;
+	else if (collides && collidesWater)
+		return COLL_YES;
+	else if (!collides && !collidesWater)
+		return COLL_NO;
 	else
 		return COLL_NO;
 }
@@ -211,5 +249,18 @@ void Map::setType(int x, int y, tileType type)
 		{
 			tileMap[x][y].integrity[j * tileMap[x][y].unit + i] = true;
 		}
+	}
+
+	if (type == TILE_BRICK)
+	{
+		tileMap[x][y].integrity[0 * 4 + 0] = false;
+		tileMap[x][y].integrity[1 * 4 + 0] = false;
+		tileMap[x][y].integrity[0 * 4 + 1] = false;
+		tileMap[x][y].integrity[1 * 4 + 1] = false;
+
+		tileMap[x][y].integrity[3 * 4 + 0] = false;
+		tileMap[x][y].integrity[3 * 4 + 1] = false;
+		tileMap[x][y].integrity[3 * 4 + 2] = false;
+		tileMap[x][y].integrity[3 * 4 + 3] = false;
 	}
 }
