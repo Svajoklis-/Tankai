@@ -19,7 +19,6 @@ Map::Map()
 			tileMap[i][j].integrity = new bool[1];
 			tileMap[i][j].integrity[0] = true;
 		}
-			
 	}
 
 	char mapChar;
@@ -66,7 +65,6 @@ Map::Map()
 	singleTile.setTextureRect(sf::IntRect(0, 0, 16, 16));
 }
 
-// grass, air
 void Map::render(coord fieldOffset, int plane)
 {
 	for (int i = 0; i < tileMapSize.x; i++)
@@ -139,7 +137,6 @@ collision Map::checkTankCollision(Tank *tank, coord newCoords)
 							tileMap[i][j].integrity[(y + 1) * 4 + (x * 2 + 1)];
 					}
 				}
-
 			}
 			else
 			{

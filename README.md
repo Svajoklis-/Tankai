@@ -4,7 +4,7 @@ Tankai
 Description
 -----------
 
-Enhanced multiplayer remake of an old NES game Battle City.
+Remake of an old NES game Battle City in SFML.
 
 Team
 ----
