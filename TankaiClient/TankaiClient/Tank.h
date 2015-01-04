@@ -27,7 +27,6 @@ public:
 
 	virtual void setDirection(directions direction)
 	{
-		oldDirection = this->direction;
 		this->direction = direction;
 	};
 
@@ -43,7 +42,6 @@ public:
 
 	virtual directions getDirection(){ return direction; }
 	virtual int getRank(){ return rank; };
-	virtual directions getOldDirection(){ return oldDirection; }
 	virtual bool move(coord fieldSize, Tank *otherTanks[], int maxTankCount, Map *map){ return true; };
 
 	virtual void render(coord){ std::cout << "Rendering tank..." << std::endl; };
@@ -58,10 +56,8 @@ protected:
 	// int x, y ;
 	int rank;
 	directions direction;
-	directions oldDirection;
 
 	bool transparentToLevel = false, transparentToTanks = false;
-	coord size;
 	int ID;
 
 };

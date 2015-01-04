@@ -15,11 +15,12 @@ class Entity
 public:
 
 	virtual void render(coord fieldOffset) = 0;
-	
+	virtual coord getSize(){ return size; };
 
 protected:
 
 	coord coords;
+	coord size;
 
 };
 

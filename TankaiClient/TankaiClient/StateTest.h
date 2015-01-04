@@ -12,6 +12,7 @@
 #include "Game.h"
 
 #include "PlayerTank.h"
+#include "FontRenderer.h"
 
 #ifndef H_STATE_TEST
 #define H_STATE_TEST
@@ -30,9 +31,6 @@ private:
 	sf::RectangleShape *shBackground;
 	sf::RectangleShape *shFieldBackground;
 
-	sf::Texture tPlayerOne;
-	sf::Sprite sPlayerOne;
-
 	Game *game;
 
 	// sizes of the game field
@@ -41,6 +39,8 @@ private:
 
 	directions direction = DIR_NO;
 	directions direction2 = DIR_NO;
+
+	FontRenderer *fontRenderer;
 };
 
 #endif // H_BRANCH_TEST

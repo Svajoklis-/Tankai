@@ -29,7 +29,6 @@ Map::Map()
 		for (int x = 0; x < tileMapSize.x; x++)
 		{
 			failas >> mapChar;
-			std::cout << mapChar;
 			switch (mapChar)
 			{
 			case 'A':
@@ -52,8 +51,6 @@ Map::Map()
 				break;
 			}
 		}
-		std::cout << std::endl;
-		//failas >> mapChar;
 	}
 
 	if (!tileTexture.loadFromFile(".\\Resources\\Images\\Tiles.png"))
@@ -62,7 +59,7 @@ Map::Map()
 	}
 
 	singleTile.setTexture(this->tileTexture);
-	singleTile.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	singleTile.setTextureRect(sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
 }
 
 void Map::render(coord fieldOffset, int plane)
@@ -91,12 +88,12 @@ void Map::render(coord fieldOffset, int plane)
 					if (tileMap[i][j].integrity[y * tileMap[i][j].unit + x] == true)
 					{
 						singleTile.setTextureRect(sf::IntRect(
-							tileMap[i][j].type * 16 + x * (16 / tileMap[i][j].unit),
-							y * (16 / tileMap[i][j].unit),
-							16 / tileMap[i][j].unit,
-							16 / tileMap[i][j].unit));
-						singleTile.setPosition((float)i * 16 + fieldOffset.x + x * (16 / tileMap[i][j].unit),
-							(float)j * 16 + fieldOffset.y + y * (16 / tileMap[i][j].unit));
+							tileMap[i][j].type * TILE_SIZE + x * (TILE_SIZE / tileMap[i][j].unit),
+							y * (TILE_SIZE / tileMap[i][j].unit),
+							TILE_SIZE / tileMap[i][j].unit,
+							TILE_SIZE / tileMap[i][j].unit));
+						singleTile.setPosition((float)i * TILE_SIZE + fieldOffset.x + x * (TILE_SIZE / tileMap[i][j].unit),
+							(float)j * TILE_SIZE + fieldOffset.y + y * (TILE_SIZE / tileMap[i][j].unit));
 
 						window->draw(singleTile);
 					}
@@ -156,13 +153,13 @@ collision Map::checkTankCollision(Tank *tank, coord newCoords)
 
 					localCollides = true;
 
-					if (newCoords.x <= i * 16 + x * (16 / collisionUnit) - 16)
+					if (newCoords.x <= i * TILE_SIZE + x * (TILE_SIZE / collisionUnit) - tank->getSize().x)
 						localCollides = false;
-					if (newCoords.x >= i * 16 + x * (16 / collisionUnit) + (16 / collisionUnit))
+					if (newCoords.x >= i * TILE_SIZE + x * (TILE_SIZE / collisionUnit) + (TILE_SIZE / collisionUnit))
 						localCollides = false;
-					if (newCoords.y <= j * 16 + y * (16 / collisionUnit) - 16)
+					if (newCoords.y <= j * TILE_SIZE + y * (TILE_SIZE / collisionUnit) - tank->getSize().y)
 						localCollides = false;
-					if (newCoords.y >= j * 16 + y * (16 / collisionUnit) + (16 / collisionUnit))
+					if (newCoords.y >= j * TILE_SIZE + y * (TILE_SIZE / collisionUnit) + (TILE_SIZE / collisionUnit))
 						localCollides = false;
 
 					if (localCollides)
@@ -246,18 +243,5 @@ void Map::setType(int x, int y, tileType type)
 		{
 			tileMap[x][y].integrity[j * tileMap[x][y].unit + i] = true;
 		}
-	}
-
-	if (type == TILE_BRICK)
-	{
-		tileMap[x][y].integrity[0 * 4 + 0] = false;
-		tileMap[x][y].integrity[1 * 4 + 0] = false;
-		tileMap[x][y].integrity[0 * 4 + 1] = false;
-		tileMap[x][y].integrity[1 * 4 + 1] = false;
-
-		tileMap[x][y].integrity[3 * 4 + 0] = false;
-		tileMap[x][y].integrity[3 * 4 + 1] = false;
-		tileMap[x][y].integrity[3 * 4 + 2] = false;
-		tileMap[x][y].integrity[3 * 4 + 3] = false;
 	}
 }

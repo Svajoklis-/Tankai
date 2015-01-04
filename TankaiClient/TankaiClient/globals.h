@@ -11,6 +11,8 @@
 
 #include <SFML/Graphics.hpp>
 
+extern int TILE_SIZE;
+
 const int screenFPS = 120;
 
 extern sf::RenderWindow *window;

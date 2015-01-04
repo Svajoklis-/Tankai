@@ -18,6 +18,8 @@ StateTest::StateTest()
 
 	shFieldBackground->setPosition(sf::Vector2<float>((float)fieldOffset.x, (float)fieldOffset.y));
 	shFieldBackground->setFillColor(sf::Color(0, 0, 0, 255));
+
+	fontRenderer = new FontRenderer(".\\Resources\\Images\\Font.png");
 }
 
 void StateTest::events()
@@ -146,6 +148,8 @@ void StateTest::render()
 	game->playerTwo->render(fieldOffset);
 
 	game->map->render(fieldOffset, 1);
+
+	fontRenderer->render("Fasadas ineternetas", 10, 10);
 }
 
 StateTest::~StateTest()

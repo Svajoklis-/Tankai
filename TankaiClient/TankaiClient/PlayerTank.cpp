@@ -11,7 +11,6 @@ PlayerTank::PlayerTank(std::string textureLocation)
 		std::cout << "Error loading tank texture" << std::endl;
 	}
 
-	oldDirection = DIR_NO;
 	direction = DIR_NO;
 	rank = 0;
 
@@ -28,9 +27,6 @@ void PlayerTank::render(coord fieldOffset)
 
 void PlayerTank::setDirection(directions direction)
 {
-	if (this->direction != DIR_NO)
-		oldDirection = this->direction;
-
 	this->direction = direction;
 	if (direction != DIR_NO)
 		sprite.setTextureRect(sf::IntRect(direction * 32 + frame * 16, rank * 16, 16, 16));
